@@ -1,0 +1,43 @@
+doctype html
+html(ng-app="app")
+  head
+    title Quotes
+    meta(name='viewport' content='width=device-width', initial-scale='1.0')
+    link(rel='stylesheet', href='/css/foundation.min.css')
+    link(rel='stylesheet', href='/css/main.css')
+
+    link(ref='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css')
+  body(ng-controller="ParentController", ng-cloak)
+
+    header
+      .row        
+        nav.large-12.columns
+          ul.button-group.right
+            li
+              a(ng-click="changeView('/quote/new')") add
+            li
+              a(ng-click="changeView('/')") all
+            li
+              a(ng-click="changeView('/quote/random')") random
+            li
+              a(ng-click="changeView('/tags')") tags
+
+
+    .row
+      div(ng-show="message.type == 'error'").alert.alert-danger {{ message.text }}
+      div(ng-show="message.type == 'info'").alert.alert-info {{ message.text }}
+      
+      block content
+
+    script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-animate.js")
+    script(src="/js/main.js")
+    script(src="/js/parentController.js")
+    script(src="/js/indexController.js")
+    script(src="/js/addQuoteController.js")
+    script(src="/js/editQuoteController.js")
+    script(src="/js/randomQuoteController.js")
+    script(src="/js/tagsController.js")
+    script(src="/js/tagQuoteController.js")
+    

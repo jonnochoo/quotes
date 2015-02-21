@@ -1,0 +1,8 @@
+h2 Tags
+
+include spinner
+
+ul.tags
+  li(ng-repeat='tag in tags').animate.tag 
+    a(ng-click="changeView('/quotes/tag/' + tag)")
+      {{tag}}

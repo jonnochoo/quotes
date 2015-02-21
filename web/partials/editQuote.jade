@@ -1,0 +1,24 @@
+.columns.large-12
+  include spinner
+
+  div(ng-hide="isLoading")
+    include message  
+
+    form(name='form', method='POST', novalidate)
+      .form-group
+        label Text
+        textarea(ng-model='quote.text', required).form-control
+
+      .form-group
+        label Author
+        input(ng-model='quote.author', type='text').form-control
+
+      .form-group
+        label Source
+        input(ng-model='quote.source', type='text').form-control
+
+      .form-group
+        label Tags
+        input(ng-model='quote.tags', type='text').form-control
+
+        button(ng-click="updateQuote()").button.small Edit
