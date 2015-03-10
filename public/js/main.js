@@ -13,6 +13,7 @@ app.config(['$routeProvider', function($routeProvider, $locationProvider){
       .otherwise({ redirectTo: '/'});
   }]);
 
+app.constant('quoteApiUrl', 'http://quotes.jonnochoo.com');
 app.directive('animateList', function($animate) {
     return {
       link: function(scope, element, attrs) {

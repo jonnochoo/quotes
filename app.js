@@ -2,10 +2,7 @@ var bodyParser = require('body-parser');
 var config = require("./config");
 var compress = require('compression');
 var express = require('express');
-var mongoose = require('mongoose');
 var path = require('path')
-
-mongoose.connect(config.mongodb.connectionString);
 
 var app = express();
 
@@ -22,8 +19,6 @@ app.use(bodyParser());
 app.get('/partials/:name', function (req, res) { 
   res.render('./web/partials/' + req.params.name); 
 });
-require("./api/tags")(app);
-require("./api/routes")(app);
 require("./web/routes")(app);
 
 app.listen(app.get('port'));

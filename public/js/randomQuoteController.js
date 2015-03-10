@@ -1,4 +1,4 @@
-app.controller('RandomQuoteController', ['$scope', '$http', '$location', function($scope, $http, $location){
+app.controller('RandomQuoteController', ['$scope', '$http', '$location', 'quoteApiUrl', function($scope, $http, $location, quoteApiUrl){
   
   $scope.isLoading = true;
   
@@ -9,7 +9,7 @@ app.controller('RandomQuoteController', ['$scope', '$http', '$location', functio
   $scope.refresh = function(){
     $scope.isLoading = true;
     $scope.quote = null;
-    $http.get('/api/quotes/random').success(function(data){
+    $http.get(quoteApiUrl + '/api/quotes/random').success(function(data){
       $scope.quote = data;
       $scope.isLoading = false;
     });

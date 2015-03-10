@@ -1,4 +1,4 @@
-app.controller('EditQuoteController', ['$scope', '$http', '$location', '$routeParams', function($scope, $http, $location, $routeParams){
+app.controller('EditQuoteController', ['$scope', '$http', '$location', '$routeParams', 'quoteApiUrl', function($scope, $http, $location, $routeParams, quoteApiUrl){
   
   $scope.changeView = function(view){
     $location.path(view); // path not hash
@@ -39,7 +39,7 @@ app.controller('EditQuoteController', ['$scope', '$http', '$location', '$routePa
 
   $scope.getQuote = function(){
     $scope.isLoading = true;
-    $http.get('/api/quotes/' + $routeParams.id)
+    $http.get(quoteApiUrl + '/api/quotes/' + $routeParams.id)
       .success(function(data){        
         $scope.isLoading = false;
         $scope.quote = data;

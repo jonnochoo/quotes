@@ -1,4 +1,4 @@
-app.controller('AddQuoteController', ['$scope', '$http', '$location', function($scope, $http, $location){
+app.controller('AddQuoteController', ['$scope', '$http', '$location', 'quoteApiUrl', function($scope, $http, $location, quoteApiUrl){
   
   $scope.changeView = function(view){
     $location.path(view); // path not hash
@@ -12,7 +12,7 @@ app.controller('AddQuoteController', ['$scope', '$http', '$location', function($
         $scope.quote.tags = $scope.quote.tags.split(',');
       }
 
-      $http.post('/api/quotes', $scope.quote)
+      $http.post(quoteApiUrl + '/api/quotes', $scope.quote)
       .success(function(){
         $location.path('/');
       })

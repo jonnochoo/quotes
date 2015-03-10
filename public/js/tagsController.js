@@ -1,4 +1,4 @@
-app.controller('TagsController', ['$scope', '$http', '$location', '$rootScope', function($scope, $http, $location, $rootScope){
+app.controller('TagsController', ['$scope', '$http', '$location', '$rootScope', 'quoteApiUrl', function($scope, $http, $location, $rootScope, quoteApiUrl){
   
   $scope.isLoading = true;
   
@@ -9,7 +9,7 @@ app.controller('TagsController', ['$scope', '$http', '$location', '$rootScope', 
   $scope.refresh = function(){
     $scope.isLoading = true;
     $scope.tags = null;
-    $http.get('/api/tags').success(function(data){
+    $http.get(quoteApiUrl + '/api/tags').success(function(data){
       $scope.tags = data;
       $scope.isLoading = false;
     });
