@@ -1,8 +1,9 @@
 var bodyParser = require('body-parser');
-var config = require("./config");
 var compress = require('compression');
+var config = require("./config");
 var express = require('express');
 var path = require('path')
+var router = require('./routes');
 
 var app = express();
 
@@ -15,9 +16,9 @@ app.use(compress());
 app.use(bodyParser());
 
 // Used for returning AngularJS partials using Jade. 
-app.get('/partials/:name', function (req, res) { 
-  res.render('./web/partials/' + req.params.name); 
+app.get('/templates/:name', function (req, res) { 
+  res.render('./templates/' + req.params.name); 
 });
-require("./web/routes")(app);
+app.use('/', router);
 
 app.listen(app.get('port'));
