@@ -1,21 +1,8 @@
-body {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: #40B3DF;
-  color: #E8E8E8; }
-
 label {
   color: White; }
 
 .label {
   margin-right: 5px; }
-
-header {
-  background-color: #176989;
-  margin-bottom: 10px;
-  padding: 10px; }
-  header li {
-    padding-right: 10px;
-    vertical-align: center; }
 
 h1 {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -35,6 +22,19 @@ a {
 a:hover {
   color: White;
   text-decoration: underline; }
+
+body {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: #40B3DF;
+  color: #E8E8E8; }
+
+header {
+  background-color: #176989;
+  margin-bottom: 10px;
+  padding: 10px; }
+  header li {
+    padding-right: 10px;
+    vertical-align: center; }
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important; }
@@ -182,6 +182,14 @@ li.quote {
 
 p#random {
   cursor: pointer; }
+
+@media only screen and (max-width: 600px) {
+  .quote-text {
+    font-size: 0.8em; }
+  .quote-random {
+    text-align: center;
+    cursor: pointer;
+    padding-top: 0px; } }
 
 .tags {
   -webkit-column-count: 3;

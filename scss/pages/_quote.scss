@@ -30,7 +30,17 @@ li.quote {
   padding-top: 250px;
 }
 
-
 p#random {
   cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .quote-text {
+    font-size: 0.8em;
+  }
+  .quote-random {  
+    text-align: center;
+    cursor: pointer;
+    padding-top: 0px;
+  } 
 }
