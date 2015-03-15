@@ -13,13 +13,12 @@ app.controller('EditQuoteController', ['$scope', '$http', '$location', '$routePa
   $scope.updateQuote = function(view){    
     if($scope.form.$valid){
       displayInfoMessage("Saving...");
-
-      if($scope.quote.tags){
+      console.log($scope.quote);
+      if($scope.quote.tags.length > 0){
         $scope.quote.tags = $scope.quote.tags.split(',');
       }
 
-      console.log($scope.quote);
-      $http.put('/api/quotes/' + $routeParams.id, { 
+      $http.put(quoteApiUrl + '/api/quotes/' + $routeParams.id, { 
         author: $scope.quote.author,
         text: $scope.quote.text,
         source: $scope.quote.source,
