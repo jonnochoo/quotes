@@ -9,6 +9,5 @@ gulp.task('sass', function () {
 });
 
 gulp.task('default', function () {
-  livereload.listen();
   gulp.watch("scss/**/*.scss", ['sass']);
 });
