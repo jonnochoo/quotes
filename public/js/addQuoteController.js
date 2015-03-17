@@ -1,36 +1,45 @@
-app.controller('AddQuoteController', ['$scope', '$http', '$location', 'quoteApiUrl', function($scope, $http, $location, quoteApiUrl){
-  
-  $scope.changeView = function(view){
-    $location.path(view); // path not hash
-  };
+(function() {
+  'use strict';
 
-  $scope.addQuote = function(view){
-    if($scope.form.$valid){
-      displayInfoMessage("Saving...");
+  angular.module('app')
+    .controller('AddQuoteController', Controller);
 
-      if($scope.quote.tags){
-        $scope.quote.tags = $scope.quote.tags.split(',');
+  Controller.$inject = ['$scope', '$http', '$location', 'quoteApiUrl'];
+
+  function Controller($scope, $http, $location, quoteApiUrl){
+    
+    $scope.changeView = function(view){
+      $location.path(view); // path not hash
+    };
+
+    $scope.addQuote = function(view){
+      if($scope.form.$valid){
+        displayInfoMessage("Saving...");
+
+        if($scope.quote.tags){
+          $scope.quote.tags = $scope.quote.tags.split(',');
+        }
+
+        $http.post(quoteApiUrl + '/api/quotes', $scope.quote)
+        .success(function(){
+          $location.path('/');
+        })
+        .error(function(){
+          displayErrorMessage("Oh no! Looks like something went wrong.");
+        });
       }
+      else{
+        displayErrorMessage("The 'Text' field must be filled in.");
+      }
+    };
 
-      $http.post(quoteApiUrl + '/api/quotes', $scope.quote)
-      .success(function(){
-        $location.path('/');
-      })
-      .error(function(){
-        displayErrorMessage("Oh no! Looks like something went wrong.");
-      });
-    }
-    else{
-      displayErrorMessage("The 'Text' field must be filled in.");
-    }
-  };
+    function displayInfoMessage(msg){
+      $scope.message = { text: msg, type: "info" };
+    };
 
-  function displayInfoMessage(msg){
-    $scope.message = { text: msg, type: "info" };
-  };
+    function displayErrorMessage(msg){
+      $scope.message = { text: msg, type: "error" };
+    };
+  }
 
-  function displayErrorMessage(msg){
-    $scope.message = { text: msg, type: "error" };
-  };
-
-}]);
+})();
