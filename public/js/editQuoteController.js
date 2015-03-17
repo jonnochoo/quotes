@@ -21,7 +21,7 @@
     $scope.updateQuote = function(view){    
       if($scope.form.$valid){
         displayInfoMessage("Saving...");
-        console.log($scope.quote);
+        
         if($scope.quote.tags.length > 0){
           $scope.quote.tags = $scope.quote.tags.split(',');
         }
