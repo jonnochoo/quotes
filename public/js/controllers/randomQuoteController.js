@@ -4,30 +4,30 @@
   angular.module('app')
     .controller('RandomQuoteController', Controller);
 
-  Controller.$inject = ['$scope', '$http', '$location', 'quoteApiUrl'];
+  Controller.$inject = ['$http', 'quoteApiUrl'];
 
-  function Controller($scope, $http, $location, quoteApiUrl) {
-  
-    $scope.isLoading = true;
+  function Controller($http, quoteApiUrl) {
+    var vm = this;
+    vm.isLoading = true;
+    vm.refresh = refresh;
+
+    activate();
+
+    function activate() {
+      vm.refresh();
+    }
     
-    $scope.init = function() {
-      $scope.refresh();
-    };
-
-    $scope.refresh = function(){
-      $scope.isLoading = true;
-      $scope.quote = null;
-      $http.get(quoteApiUrl + '/api/quotes/random').success(function(data){
-        $scope.quote = data;
-        $scope.isLoading = false;
-      });
-    };
-
-    $scope.changeView = function(view){
-      $location.path(view); // path not hash
-    };
-
-    $scope.init();
+    function refresh() {
+      vm.isLoading = true;
+      $http.get(quoteApiUrl + '/api/quotes/random')
+        .success(function(data) {
+          vm.quote = data;
+          vm.isLoading = false;
+        })
+        .error(function(err) {
+          vm.isLoading = false;
+        });
+    }
   }
 
 })();  

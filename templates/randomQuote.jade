@@ -3,6 +3,6 @@
   .quote.quote-random.animate-show(ng-click="refresh()")
     include spinner
     div(ng-show="!isLoading")
-      p.quote-text {{quote.text}}
-      p.quote-author {{quote.author}} {{quote.source}}
+      p.quote-text {{vm.quote.text}}
+      p.quote-author {{vm.quote.author}} {{vm.quote.source}}
     

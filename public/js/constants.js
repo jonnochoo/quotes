@@ -3,6 +3,6 @@
 
   angular
     .module('app')
-    .constant('quoteApiUrl', 'http://quotes-api.jonnochoo.com/');
+    .constant('quoteApiUrl', 'http://quotes-api.jonnochoo.com');
     
 })();
