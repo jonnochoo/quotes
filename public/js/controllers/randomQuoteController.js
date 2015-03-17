@@ -4,9 +4,9 @@
   angular.module('app')
     .controller('RandomQuoteController', Controller);
 
-  Controller.$inject = ['$http', 'quoteApiUrl'];
+  Controller.$inject = ['quotesDataService'];
 
-  function Controller($http, quoteApiUrl) {
+  function Controller(quotesDataService) {
     var vm = this;
     vm.isLoading = true;
     vm.refresh = refresh;
@@ -19,12 +19,9 @@
     
     function refresh() {
       vm.isLoading = true;
-      $http.get(quoteApiUrl + '/api/quotes/random')
-        .success(function(data) {
+      quotesDataService.getRandomQuote()
+        .then(function(data) {
           vm.quote = data;
-          vm.isLoading = false;
-        })
-        .error(function(err) {
           vm.isLoading = false;
         });
     }

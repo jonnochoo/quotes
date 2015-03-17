@@ -1,8 +1,8 @@
 .small-12.columns
   include message    
-  .quote.quote-random.animate-show(ng-click="refresh()")
+  .quote.quote-random.animate-show(ng-click="vm.refresh()")
     include spinner
-    div(ng-show="!isLoading")
+    div(ng-show="!vm.isLoading")
       p.quote-text {{vm.quote.text}}
       p.quote-author {{vm.quote.author}} {{vm.quote.source}}
     
