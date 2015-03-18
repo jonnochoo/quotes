@@ -1,7 +1,6 @@
 .small-12.columns
-  include refreshButton
-  include spinner
+  jc-spinner(ng-show="vm.isLoading")
   ul.quotes
-    li(ng-repeat='quote in quotes',ng-click="changeView('/quote/edit/' + quote._id)").quote.animate
+    li(ng-repeat='quote in vm.quotes',ng-click="changeView('/quote/edit/' + quote._id)").quote.animate
       p {{quote.text}} - {{quote.author}} {{quote.source}}
       span(ng-repeat='tag in quote.tags').label.label-info {{tag}}

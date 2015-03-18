@@ -4,23 +4,24 @@
   angular.module('app')
     .controller('AddQuoteController', Controller);
 
-  Controller.$inject = ['$scope', '$http', '$location', 'quoteApiUrl'];
+  Controller.$inject = ['$http', '$location', 'quoteApiUrl'];
 
-  function Controller($scope, $http, $location, quoteApiUrl){
-    
-    $scope.changeView = function(view){
+  function Controller(http, $location, quoteApiUrl){
+    var vm = this;
+
+    vm.changeView = function(view){
       $location.path(view); // path not hash
     };
 
-    $scope.addQuote = function(view){
-      if($scope.form.$valid){
+    vm.addQuote = function(view){
+      if(vm.form.$valid){
         displayInfoMessage("Saving...");
 
-        if($scope.quote.tags){
-          $scope.quote.tags = $scope.quote.tags.split(',');
+        if(vm.quote.tags){
+          vm.quote.tags = vm.quote.tags.split(',');
         }
 
-        $http.post(quoteApiUrl + '/api/quotes', $scope.quote)
+        $http.post(quoteApiUrl + '/api/quotes', vm.quote)
         .success(function(){
           $location.path('/');
         })
@@ -34,11 +35,11 @@
     };
 
     function displayInfoMessage(msg){
-      $scope.message = { text: msg, type: "info" };
+      vm.message = { text: msg, type: "info" };
     };
 
     function displayErrorMessage(msg){
-      $scope.message = { text: msg, type: "error" };
+      vm.message = { text: msg, type: "error" };
     };
   }
 

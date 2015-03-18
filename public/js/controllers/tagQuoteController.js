@@ -4,30 +4,30 @@
   angular.module('app')
     .controller('TagQuoteController', Controller);
 
-  Controller.$inject = ['$scope', '$http', '$location', '$routeParams'];
+  Controller.$inject = ['$http', '$location', '$routeParams'];
 
-  function Controller($scope, $http, $location, $routeParams){
+  function Controller($http, $location, $routeParams){
+    var vm = this;
+    vm.isLoading = true;
     
-    $scope.isLoading = true;
-    
-    $scope.init = function() {
-      $scope.refresh();
+    vm.init = function() {
+      vm.refresh();
     };
 
-    $scope.refresh = function(){
-      $scope.isLoading = true;
-      $scope.quotes = null;
+    vm.refresh = function(){
+      vm.isLoading = true;
+      vm.quotes = null;
       $http.get('/api/quotes/tag/' + $routeParams.tag).success(function(data){
-        $scope.quotes = data;
-        $scope.isLoading = false;
+        vm.quotes = data;
+        vm.isLoading = false;
       });
     };
 
-    $scope.changeView = function(view){
+    vm.changeView = function(view){
       $location.path(view); // path not hash
     };
 
-    $scope.init();
+    vm.init();
   }
 
 })();

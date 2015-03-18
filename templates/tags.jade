@@ -1,8 +1,8 @@
 h2 Tags
 
-include spinner
+jc-spinner(ng-show="vm.isLoading")
 
 ul.tags
-  li(ng-repeat='tag in tags').animate.tag 
+  li(ng-repeat='tag in vm.tags').animate.tag 
     a(ng-click="changeView('/quotes/tag/' + tag)")
       {{tag}}

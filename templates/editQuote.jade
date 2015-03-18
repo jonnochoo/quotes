@@ -1,5 +1,5 @@
 .columns.large-12
-  include spinner
+  jc-spinner(ng-show="vm.isLoading")
 
   div(ng-hide="isLoading")
     include message  

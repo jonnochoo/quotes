@@ -4,30 +4,26 @@
   angular.module('app')
     .controller('TagsController', Controller);
 
-    Controller.$inject = ['$scope', '$http', '$location', '$rootScope', 'quoteApiUrl'];
+    Controller.$inject = ['$http', '$location', '$rootScope', 'quoteApiUrl'];
 
-    function Controller($scope, $http, $location, $rootScope, quoteApiUrl){
-  
-      $scope.isLoading = true;
+    function Controller($http, $location, $rootScope, quoteApiUrl){
+      var vm = this;
+      vm.isLoading = true;
       
-      $scope.init = function() {
-        $scope.refresh();
+      vm.init = function() {
+        vm.refresh();
       };
 
-      $scope.refresh = function(){
-        $scope.isLoading = true;
-        $scope.tags = null;
+      vm.refresh = function(){
+        vm.isLoading = true;
+        vm.tags = null;
         $http.get(quoteApiUrl + '/api/tags').success(function(data){
-          $scope.tags = data;
-          $scope.isLoading = false;
+          vm.tags = data;
+          vm.isLoading = false;
         });
       };
 
-      $scope.changeView = function(view){
-        $location.path(view); // path not hash
-      };
-
-      $scope.init();
+      vm.init();
     }
 
 })();

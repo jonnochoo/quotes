@@ -4,33 +4,34 @@
   angular.module('app')
     .controller('EditQuoteController', Controller);
 
-  Controller.$inject = ['$scope', '$http', '$location', '$routeParams', 'quoteApiUrl'];
+  Controller.$inject = ['$http', '$location', '$routeParams', 'quoteApiUrl'];
 
-  function Controller($scope, $http, $location, $routeParams, quoteApiUrl) {
+  function Controller($http, $location, $routeParams, quoteApiUrl) {
+    var vm = this;
     
-    $scope.changeView = function(view){
+    vm.changeView = function(view){
       $location.path(view); // path not hash
     };
 
-    $scope.isLoading = true;
+    vm.isLoading = true;
     
-    $scope.init = function() {
-      $scope.getQuote();
+    vm.init = function() {
+      vm.getQuote();
     };
 
-    $scope.updateQuote = function(view){    
-      if($scope.form.$valid){
+    vm.updateQuote = function(view){    
+      if(vm.form.$valid){
         displayInfoMessage("Saving...");
         
-        if($scope.quote.tags.length > 0){
-          $scope.quote.tags = $scope.quote.tags.split(',');
+        if(vm.quote.tags.length > 0){
+          vm.quote.tags = vm.quote.tags.split(',');
         }
 
         $http.put(quoteApiUrl + '/api/quotes/' + $routeParams.id, { 
-          author: $scope.quote.author,
-          text: $scope.quote.text,
-          source: $scope.quote.source,
-          tags: $scope.quote.tags
+          author: vm.quote.author,
+          text: vm.quote.text,
+          source: vm.quote.source,
+          tags: vm.quote.tags
         })
         .success(function(){
           $location.path('/');
@@ -44,28 +45,28 @@
       }
     };
 
-    $scope.getQuote = function(){
-      $scope.isLoading = true;
+    vm.getQuote = function(){
+      vm.isLoading = true;
       $http.get(quoteApiUrl + '/api/quotes/' + $routeParams.id)
         .success(function(data){        
-          $scope.isLoading = false;
-          $scope.quote = data;
+          vm.isLoading = false;
+          vm.quote = data;
         })
         .error(function(){
-          $scope.isLoading = false;
+          vm.isLoading = false;
           displayErrorMessage("Oh no! Looks like something went wrong.");
         });
     };
 
     function displayInfoMessage(msg){
-      $scope.message = { text: msg, type: "info" };
+      vm.message = { text: msg, type: "info" };
     };
 
     function displayErrorMessage(msg){
-      $scope.message = { text: msg, type: "error" };
+      vm.message = { text: msg, type: "error" };
     };
 
-    $scope.init();
+    vm.init();
   }
 
 })();
