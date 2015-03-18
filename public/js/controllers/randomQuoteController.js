@@ -4,9 +4,9 @@
   angular.module('app')
     .controller('RandomQuoteController', Controller);
 
-  Controller.$inject = ['quotesDataService'];
+  Controller.$inject = ['quotesDataService', 'notificationService'];
 
-  function Controller(quotesDataService) {
+  function Controller(quotesDataService, notificationService) {
     var vm = this;
     vm.isLoading = true;
     vm.refresh = refresh;
@@ -23,6 +23,11 @@
         .then(function(data) {
           vm.quote = data;
           vm.isLoading = false;
+        })
+        .catch(function(err){
+          vm.isLoading = false;
+          vm.notificationService = notificationService;
+          notificationService.sendErrorNotification(err);
         });
     }
   }

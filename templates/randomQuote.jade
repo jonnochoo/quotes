@@ -1,6 +1,6 @@
-.small-12.columns
-  include message    
+.small-12.columns  
   .quote.quote-random(ng-click="vm.refresh()")
+    {{notificationService}}
     jc-spinner(ng-show="vm.isLoading")
     div(ng-show="!vm.isLoading").animate-show
       p.quote-text {{vm.quote.text}}
